@@ -13,7 +13,6 @@ import { Button } from './button';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-  const { pending } = useFormStatus();
   return (
     <form className="space-y-3" action={dispatch}>
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -61,9 +60,7 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={pending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
+        <LoginButton />
         <div className="flex h-8 items-end space-x-1">
           <div
             className="flex h-8 items-end space-x-1"
@@ -80,5 +77,14 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+  );
+}
+
+function LoginButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button className="mt-4 w-full" aria-disabled={pending}>
+      Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+    </Button>
   );
 }
